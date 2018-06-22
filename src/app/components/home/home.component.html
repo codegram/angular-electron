@@ -1,5 +1,16 @@
 <div class="container">
+  <mat-toolbar color="primary" *ngIf="electron.isElectron()">
+    <mat-toolbar-row>
+      <span class="spacer"></span>
+      <span class="mat-body-1">Test app</span>
+      <span class="spacer"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
   <h1 class="title">
     {{ 'PAGES.HOME.TITLE' | translate }}
   </h1>
+  <mat-form-field>
+    <input matInput type="number" [formControl]="badgeCount" />
+  </mat-form-field>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectronService } from '../../providers/electron.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  badgeCount = new FormControl(0);
 
   ngOnInit() {
+    this.badgeCount.valueChanges.subscribe(value => {
+      this.electron.ipcRenderer.send('update-badge-count', {
+        count: +value
+      });
+    });
   }
 
+  constructor(private electron: ElectronService) {}
 }
